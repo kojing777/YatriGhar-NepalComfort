@@ -123,7 +123,7 @@ const ListRooms = () => {
                         checked={item.isAvailable}
                         disabled={toggleLoading === item._id}
                       />
-                      <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"></div>
+                      <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-amber-500 transition-colors duration-200"></div>
                       <span className="dot absolute left-1 top-1 h-5 w-5 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
                     </label>
                   </td>

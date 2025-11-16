@@ -109,7 +109,7 @@ const AddRooms = () => {
         {Object.keys(images).map((key) => (
           <label htmlFor={`roomImage${key}`} key={key}>
             <img
-              className="max-h-13 cursor-pointer capacity-80"
+              className="max-h-13 bg-amber-300 cursor-pointer capacity-80"
               src={
                 images[key]
                   ? URL.createObjectURL(images[key])
@@ -186,7 +186,7 @@ const AddRooms = () => {
         ))}
       </div>
       <button
-        className="bg-primary text-white py-2 px-8 rounded mt-8 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-amber-500 text-white py-2 px-8 rounded mt-8 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={loading}
       >
         {loading ? "Adding Room..." : "Add Room"}
