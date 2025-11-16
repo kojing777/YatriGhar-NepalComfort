@@ -11,11 +11,37 @@ import {
 import { GiSuitcase } from "react-icons/gi";
 import Title from "./Title";
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 
 const Testimonials = () => {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  // Intersection Observer for scroll-triggered animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative overflow-hidden px-4 sm:px-6 md:px-16 lg:px-24 py-16 md:py-20 bg-white/80 backdrop-blur-sm">
+    <div ref={sectionRef} className="relative overflow-hidden px-4 sm:px-6 md:px-16 lg:px-24 py-16 md:py-20 bg-white/80 backdrop-blur-sm">
       {/* Decorative elements */}
       <div className="absolute top-20 left-4 sm:left-10 hidden lg:block animate-float">
         <div className="bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg border border-white/20"></div>
@@ -28,7 +54,9 @@ const Testimonials = () => {
 
       <div className="max-w-7xl mx-auto relative">
         {/* Title Section */}
-        <div className="text-center mb-12 animate-fade-in">
+        <div className={`text-center mb-12 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <Title
             title="Guest Testimonials"
             subTitle="What our guests are saying about their experience"
@@ -36,13 +64,18 @@ const Testimonials = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
+        >
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className={`relative bg-white/90 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 transform hover:-translate-y-1 animate-fade-in delay-${
-                index * 100
-              } group`}
+              className={`relative bg-white/90 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 md:duration-700 border border-white/20 transform hover:-translate-y-1 group ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: isVisible ? `${400 + index * 150}ms` : '0ms' }}
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative">
@@ -101,7 +134,11 @@ const Testimonials = () => {
         </div>
 
         {/* View More Button */}
-        <div className="text-center mt-12 md:mt-16 animate-fade-in delay-500">
+        <div className={`text-center mt-12 md:mt-16 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: isVisible ? '800ms' : '0ms' }}
+        >
           <button onClick={() => navigate('/reviews')} className="my-4 group inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg transition-all duration-500 transform hover:scale-105 hover:shadow-xl mx-auto">
             Read More Reviews
             <FaChevronRight className="transform group-hover:translate-x-1 transition-transform duration-300" />

@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DeveloperCard from "../pages/DeveloperCard ";
 import Title from "../components/Title";
 
 export default function About() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  // Intersection Observer for scroll-triggered animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <>
       <style>{`
@@ -12,9 +36,11 @@ export default function About() {
         }
       `}</style>
 
-      <div className="bg-slate-50 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 px-6 md:px-16 lg:px-24">
+      <div ref={sectionRef} className="bg-slate-50 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 px-6 md:px-16 lg:px-24">
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <Title title="About YatriGhar"
           subTitle="Connecting Travelers with Comfort" />
          
@@ -22,7 +48,11 @@ export default function About() {
 
         {/* Mission & Vision Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto mb-8">
-          <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+          <div className={`bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition-all duration-500 md:duration-700 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
+          >
             <h3 className="text-2xl font-semibold text-amber-600 mb-4">Our Mission</h3>
             <p className="text-slate-600 leading-relaxed">
               Our mission is to simplify travel bookings through technology — making every journey
@@ -31,7 +61,11 @@ export default function About() {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+          <div className={`bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition-all duration-500 md:duration-700 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{ transitionDelay: isVisible ? '400ms' : '0ms' }}
+          >
             <h3 className="text-2xl font-semibold text-amber-600 mb-4">Our Vision</h3>
             <p className="text-slate-600 leading-relaxed">
               We aim to become Nepal’s most trusted hospitality platform — bridging the gap between
@@ -42,7 +76,13 @@ export default function About() {
         </div>
 
         {/* Developer Cards */}
-        <DeveloperCard />
+        <div className={`transition-all duration-500 md:duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: isVisible ? '600ms' : '0ms' }}
+        >
+          <DeveloperCard />
+        </div>
      
       </div>
     </>

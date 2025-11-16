@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaArrowRight, FaCalendarAlt, FaChevronRight, FaClock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Title from "../components/Title";
 
 const BlogSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  // Intersection Observer for scroll-triggered animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const blogPosts = [
     {
       id: 1,
@@ -77,16 +102,22 @@ const BlogSection = () => {
         }
       `}</style>
 
-      <section className="py-16 bg-gradient-to-b from-slate-50 to-amber-50/20">
+      <section ref={sectionRef} className="py-16 bg-gradient-to-b from-slate-50 to-amber-50/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section */}
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 transition-all duration-700 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
             <Title title="Travel Blog"
             subTitle="Discover inspiring travel stories, expert guides, and insider tips to make your Indian journey unforgettable." />
           </div>
 
           {/* Featured Blog Post */}
-          <div className="blog-card mb-16">
+          <div className={`mb-16 transition-all duration-700 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
+          >
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="relative overflow-hidden">
@@ -144,7 +175,11 @@ const BlogSection = () => {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center mt-16">
+          <div className={`text-center mt-16 transition-all duration-700 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{ transitionDelay: isVisible ? '400ms' : '0ms' }}
+          >
             <Link to="/blogs" className="group inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
               View All Blog Posts
                <FaChevronRight className="transform group-hover:translate-x-1 transition-transform duration-300" />

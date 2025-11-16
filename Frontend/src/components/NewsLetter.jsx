@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { LiaBoxOpenSolid } from "react-icons/lia";
 import { FaRegHand } from "react-icons/fa6";
 import axios from "axios";
@@ -8,6 +8,30 @@ const NewsLetter = () => {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  // Intersection Observer for scroll-triggered animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,9 +56,11 @@ const NewsLetter = () => {
   };
 
   return (
-    <section className="py-16 bg-slate-50 px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="py-16 bg-slate-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <h2 className="text-3xl md:text-4xl font-playfair font-bold text-gray-900 mb-4">
             Stay <span className="text-amber-700">Inspired!</span>
           </h2>
@@ -46,7 +72,11 @@ const NewsLetter = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Subscription Card */}
-          <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+          <div className={`bg-white rounded-2xl border border-gray-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col ${
+            isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ transitionDelay: isVisible ? '200ms' : '0ms', transitionDuration: '700ms' }}
+          >
             {isSubscribed ? (
               <div className="bg-green-50 border border-green-100 p-4 rounded-lg mb-6">
                 <p className="text-green-700 font-medium text-center">
@@ -89,9 +119,17 @@ const NewsLetter = () => {
           </div>
 
           {/* Benefits Card */}
-          <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+          <div className={`bg-white rounded-2xl border border-gray-200 p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col ${
+            isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ transitionDelay: isVisible ? '400ms' : '0ms', transitionDuration: '700ms' }}
+          >
             <div className="space-y-6">
-              <div className="flex items-start gap-4">
+              <div className={`flex items-start gap-4 transition-all duration-500 transform ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: isVisible ? '600ms' : '0ms' }}
+              >
                 <div className="bg-amber-100 p-3 rounded-lg">
                   <LiaBoxOpenSolid className="h-6.5 w-6" />
                 </div>
@@ -106,7 +144,11 @@ const NewsLetter = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div className={`flex items-start gap-4 transition-all duration-500 transform ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: isVisible ? '800ms' : '0ms' }}
+              >
                 <div className="bg-amber-100 p-3 rounded-lg">
                   <FaRegHand className="h-5 w-5" />
                 </div>

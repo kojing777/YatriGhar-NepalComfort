@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Title from "./Title";
 import { exclusiveOffers } from "../assets/assets";
 import { FaChevronRight } from "react-icons/fa";
@@ -7,12 +7,36 @@ import { useAppContext } from "../context/AppContext";
 
 const ExclusiveOffers = () => {
   const [mounted, setMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
   const [timeLeft, setTimeLeft] = useState({ 
     days: 0, 
     hours: 0, 
     minutes: 0, 
     seconds: 0 
   });
+
+  // Intersection Observer for scroll-triggered animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   // Countdown timer effect
   useEffect(() => {
@@ -72,9 +96,11 @@ const ExclusiveOffers = () => {
   };
 
   return (
-    <section className="flex flex-col items-center px-6 md:px-12 lg:px-20 pt-14 pb-16 bg-slate-50">
+    <section ref={sectionRef} className="flex flex-col items-center px-6 md:px-12 lg:px-20 pt-14 pb-16 bg-slate-50">
       <div className="w-full max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-4">
+        <div className={`flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-4 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <Title
             align="left"
             title="YatriGhar Exclusive Offers"
@@ -91,18 +117,22 @@ const ExclusiveOffers = () => {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 w-full" role="list">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 w-full transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
+        role="list">
           {exclusiveOffers.map((item, i) => (
             <article
               key={item._id || i}
               role="listitem"
               aria-labelledby={`offer-title-${i}`}
-              className={`group relative overflow-hidden rounded-xl text-white bg-no-repeat bg-cover bg-center p-6 flex flex-col justify-between shadow-lg transform transition-all duration-500 ${
-                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              className={`group relative overflow-hidden rounded-xl text-white bg-no-repeat bg-cover bg-center p-6 flex flex-col justify-between shadow-lg transform transition-all duration-500 md:duration-700 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{
                 backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.5)), url(${item.image || "https://via.placeholder.com/800x600?text=Offer"})`,
-                transitionDelay: `${i * 80}ms`,
+                transitionDelay: isVisible ? `${400 + i * 150}ms` : '0ms',
                 minHeight: 260,
               }}
             >
@@ -140,13 +170,10 @@ const ExclusiveOffers = () => {
 
         {/* Countdown Banner */}
         <div 
-          className="mt-16 bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl p-6 text-white shadow-lg"
-          style={{
-            opacity: mounted ? 1 : 0,
-            transform: mounted ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.6s ease, transform 0.6s ease',
-            transitionDelay: '0.4s'
-          }}
+          className={`mt-16 bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl p-6 text-white shadow-lg transition-all duration-700 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{ transitionDelay: isVisible ? '1000ms' : '0ms' }}
         >
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-4 md:mb-0 text-center md:text-left">

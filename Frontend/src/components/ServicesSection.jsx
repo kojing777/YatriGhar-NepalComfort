@@ -1,11 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Title from "./Title";
 
 export default function ServicesSection() {
-  const [mounted, setMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
 
+  // Intersection Observer for scroll-triggered animations
   useEffect(() => {
-    setMounted(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const services = [
@@ -33,27 +52,28 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section className="flex flex-col items-center py-20 bg-gradient-to-br from-slate-50 via-white to-amber-50/30 px-4 sm:px-6 md:px-16 lg:px-24 text-center overflow-hidden">
-      <Title title={"Our Services"} subTitle={"We Offer the Best Hospitality Services"} />
-      <div className="h-8" />
+    <section ref={sectionRef} className="flex flex-col items-center py-20 bg-gradient-to-br from-slate-50 via-white to-amber-50/30 px-4 sm:px-6 md:px-16 lg:px-24 text-center overflow-hidden">
+      <div className={`transition-all duration-700 transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}>
+        <Title title={"Our Services"} subTitle={"We Offer the Best Hospitality Services"} />
+        <div className="h-8" />
+      </div>
 
       <div className="w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className={`relative rounded-2xl p-6 md:p-8 transition-all duration-700 transform group cursor-pointer overflow-hidden ${
-                mounted
-                  ? 'opacity-100 translate-y-0 rotate-0 scale-100'
-                  : 'opacity-0 translate-y-12 rotate-6 scale-95'
+              className={`relative rounded-2xl p-6 md:p-8 transition-all duration-500 md:duration-700 transform group cursor-pointer overflow-hidden ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               } ${
                 service.highlight
-                  ? "bg-gradient-to-br from-amber-50/90 to-white border-2 border-amber-200 shadow-2xl scale-105 z-10 animate-pulse hover:animate-none"
+                  ? "bg-gradient-to-br from-amber-50/90 to-white border-2 border-amber-200 shadow-2xl scale-105 z-10"
                   : "bg-white/95 backdrop-blur-sm border border-white/30 hover:shadow-2xl hover:-translate-y-3 shadow-lg hover:scale-105"
               } hover:shadow-amber-200/50`}
               style={{
-                transitionDelay: `${index * 200}ms`,
-                animation: service.highlight && mounted ? 'float 3s ease-in-out infinite' : 'none'
+                transitionDelay: isVisible ? `${200 + index * 150}ms` : '0ms'
               }}
             >
               {/* Enhanced Shine Effect */}

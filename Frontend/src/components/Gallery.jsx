@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Title from "./Title";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa";
@@ -6,7 +6,32 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const Gallery = () => {
   const [stopScroll, setStopScroll] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
   const navigate = useNavigate()
+
+  // Intersection Observer for scroll-triggered animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const cardData = [
     {
       title: "Luxury Heritage Stays",
@@ -41,7 +66,7 @@ const Gallery = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-slate-50 to-amber-50/30">
+    <section ref={sectionRef} className="py-16 bg-gradient-to-b from-slate-50 to-amber-50/30">
       <style>{`
         @keyframes marqueeScroll { 
           0% { transform: translateX(0%); } 
@@ -54,7 +79,9 @@ const Gallery = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="mb-12">
+        <div className={`mb-12 transition-all duration-700 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-4">
             <Title
               align="left"
@@ -76,7 +103,10 @@ const Gallery = () => {
 
         {/* Marquee Gallery */}
         <div
-          className="overflow-hidden w-full mb-10 relative"
+          className={`overflow-hidden w-full mb-10 relative transition-all duration-700 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
           onMouseEnter={() => setStopScroll(true)}
           onMouseLeave={() => setStopScroll(false)}
           onTouchStart={() => setStopScroll(true)}
