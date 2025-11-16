@@ -13,8 +13,12 @@ const RoomDetails = () => {
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
   const [guests, setGuests] = useState(1);
-
   const [isAvailable, setIsAvailable] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   //check room available
   const checkAvailability = async () => {
     try {
@@ -89,9 +93,15 @@ const RoomDetails = () => {
 
   return (
     room && (
-      <div className="py-12 md:py-20 lg:py-28 px-4 md:px-16 lg:px-24 xl:px-32">
+      <div className={`pt-24 sm:pt-28 md:pt-32 lg:pt-36 pb-12 md:pb-20 lg:pb-28 px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-1000 transform ${
+        mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}>
         {/* room details */}
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
+        <div className={`flex flex-col md:flex-row items-start md:items-center gap-2 transition-all duration-700 transform ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+        style={{ transitionDelay: '200ms' }}
+        >
           <h1 className="text-3xl md:text-4xl font-playfair">
             {room.hotel?.name || "Unknown Hotel"}{" "}
             <span className="font-inter text-sm">({room.roomType})</span>
@@ -102,18 +112,30 @@ const RoomDetails = () => {
         </div>
 
         {/* room rating */}
-        <div className="flex items-center mt-2 gap-1">
+        <div className={`flex items-center mt-2 gap-1 transition-all duration-700 transform ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+        style={{ transitionDelay: '300ms' }}
+        >
           <StarRating />
           <p className="ml-2">250+ reviews</p>
         </div>
         {/* rooms address */}
-        <div className="flex items-center gap-1 text-gray-400 mt-2">
+        <div className={`flex items-center gap-1 text-gray-400 mt-2 transition-all duration-700 transform ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+        style={{ transitionDelay: '400ms' }}
+        >
           <img src={assets.locationIcon} alt="" />
           <span>{room.hotel?.address || "Unknown Address"}</span>
         </div>
 
         {/* room images */}
-        <div className="flex flex-col lg:flex-row gap-6 mt-6">
+        <div className={`flex flex-col lg:flex-row gap-6 mt-6 transition-all duration-700 transform ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: '500ms' }}
+        >
           <div className="lg:w-1/2 w-full">
             <img
               src={mainImage}
@@ -138,7 +160,11 @@ const RoomDetails = () => {
           </div>
         </div>
         {/* room highlights */}
-        <div className="flex flex-col md:flex-row  justify-between mt-10">
+        <div className={`flex flex-col md:flex-row justify-between mt-10 transition-all duration-700 transform ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: '700ms' }}
+        >
           <div className="flex flex-col">
             <h1 className="text-3xl md:text-4xl font-playfair">
               Indulge in a Nepalese Oasis of Refined Comfort.
@@ -148,7 +174,10 @@ const RoomDetails = () => {
               {room.amenities.map((item, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-sm"
+                  className={`inline-flex items-center gap-2 bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-sm transition-all duration-500 transform ${
+                    mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                  style={{ transitionDelay: `${800 + index * 100}ms` }}
                 >
                   <img
                     src={facilityIcons[item]}
@@ -170,7 +199,10 @@ const RoomDetails = () => {
         {/* checkin checkout form */}
         <form
           onSubmit={onSubmitHandler}
-          className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white/20 shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-4 md:p-6 rounded-xl mx-auto mt-12 max-w-6xl"
+          className={`flex flex-col md:flex-row items-start md:items-center justify-between bg-white/20 shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-4 md:p-6 rounded-xl mx-auto mt-12 max-w-6xl transition-all duration-700 transform ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+          style={{ transitionDelay: '900ms' }}
           action=""
         >
           <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-10 text-gray-600 font-medium w-full">
@@ -237,12 +269,19 @@ const RoomDetails = () => {
         </form>
 
         {/* common specification */}
-        <div className="mt-24">
+        <div className={`mt-24 transition-all duration-700 transform ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: '1100ms' }}
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {roomCommonData.map((spec, index) => (
               <div
                 key={index}
-                className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
+                className={`flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-500 transform ${
+                  mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+                style={{ transitionDelay: `${1200 + index * 150}ms` }}
               >
                 <div className="flex-shrink-0">
                   <div className="h-12 w-12 rounded-full bg-amber-50 flex items-center justify-center ring-1 ring-amber-100">
@@ -258,7 +297,11 @@ const RoomDetails = () => {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col md:flex-row items-start md:items-start gap-8">
+        <div className={`mt-12 flex flex-col md:flex-row items-start md:items-start gap-8 transition-all duration-700 transform ${
+          mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: '1400ms' }}
+        >
           {/* hotel owner name (left on md+) */}
           <div className="md:w-1/3 w-full">
             <div className="flex flex-col items-start gap-4 bg-white p-4 rounded-lg shadow-sm">

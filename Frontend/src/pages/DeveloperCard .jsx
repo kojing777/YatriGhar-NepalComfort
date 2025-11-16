@@ -128,7 +128,7 @@ export default function AboutUs() {
           twitter="#"
         />
         <DeveloperCard
-          name="Sachin Magar,Quality Assurance Engineer"
+          name="Sachin Magar"
           role="Frontend Developer"
           description="Designing user-centric interfaces with a focus on performance, accessibility, and aesthetics."
           image={dov2}

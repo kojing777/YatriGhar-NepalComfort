@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { facilityIcons } from "../assets/assets";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { HiOutlineMapPin } from "react-icons/hi2";
@@ -50,6 +50,11 @@ const AllRooms = () => {
     sortBy: "",
   });
   const [selectedSort, setSelectedSort] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const roomTypes = ["single", "double", "deluxe", "family"];
   const priceRanges = [
@@ -161,7 +166,9 @@ const AllRooms = () => {
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row  mb-6 items-start justify-between pt-28 px-4 md:px-16 lg:px-24 xl:px-32 gap-8 lg:gap-10">
+    <div className={`flex flex-col-reverse lg:flex-row mb-6 items-start justify-between pt-28 px-4 md:px-16 lg:px-24 xl:px-32 gap-8 lg:gap-10 transition-all duration-1000 transform ${
+      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`}>
       {/* left content */}
       <div className="flex-1">
         <div className="flex flex-col items-start lg:items-start text-start lg:text-left mb-6">
@@ -171,10 +178,13 @@ const AllRooms = () => {
             align="left"
           />
         </div>
-        {filteredRooms.map((room) => (
+        {filteredRooms.map((room, index) => (
           <article
             key={room._id}
-            className="bg-white/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 mb-8 border border-transparent hover:border-amber-100"
+            className={`bg-white/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-500 mb-8 border border-transparent hover:border-amber-100 transform ${
+              mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+            style={{ transitionDelay: `${index * 150}ms` }}
           >
             <div className="md:flex">
               <div className="md:w-1/2">
@@ -271,7 +281,11 @@ const AllRooms = () => {
         ))}
       </div>
       {/* filters */}
-      <div className="bg-white w-full lg:w-80 border border-gray-300 text-gray-600 max-lg:mb-8 min-lg:mt-16 lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-auto">
+      <div className={`bg-white w-full lg:w-80 border border-gray-300 text-gray-600 max-lg:mb-8 min-lg:mt-16 lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-auto transition-all duration-1000 transform ${
+        mounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+      }`}
+      style={{ transitionDelay: '300ms' }}
+      >
         <div
           className={`flex items-center justify-between px-5 py-2.5 min-lg:border-b ${
             openFilters && "border-b"

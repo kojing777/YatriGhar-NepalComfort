@@ -32,7 +32,7 @@ const Reviews = () => {
   }, []);
 
   return (
-    <section className="py-20 px-4 bg-slate-50 min-h-screen">
+    <section className="pt-24 sm:pt-28 md:pt-32 pb-20 px-4 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <Title title="Guest Reviews" subTitle="Real experiences from our travelers" />
 

@@ -115,7 +115,7 @@ const AllBlogs = () => {
   });
 
   return (
-    <section className="min-h-screen mt-14 bg-gradient-to-br from-slate-50 via-amber-50/20 to-slate-100 py-12">
+    <section className="min-h-screen pt-24 sm:pt-28 md:pt-32 bg-gradient-to-br from-slate-50 via-amber-50/20 to-slate-100 py-12">
       <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className={`flex flex-col lg:flex-row items-start lg:items-center justify-between mb-12 transition-all duration-700 ${

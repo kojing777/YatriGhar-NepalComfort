@@ -12,7 +12,7 @@ export default function About() {
         }
       `}</style>
 
-      <div className="bg-slate-50 min-h-screen mt-6 py-20 px-6 md:px-16 lg:px-24">
+      <div className="bg-slate-50 min-h-screen pt-24 sm:pt-28 md:pt-32 pb-20 px-6 md:px-16 lg:px-24">
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <Title title="About YatriGhar"

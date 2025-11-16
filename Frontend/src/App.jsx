@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
@@ -20,8 +20,15 @@ import { useAppContext } from "./context/AppContext";
 import Loader from "./components/Loader";
 
 const App = () => {
-  const isOwnerPath = useLocation().pathname.includes("owner");
+  const location = useLocation();
+  const isOwnerPath = location.pathname.includes("owner");
   const { showHotelReg } = useAppContext();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div>
       <Toaster
