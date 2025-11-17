@@ -1,4 +1,3 @@
-import logo from './logo.svg'
 import searchIcon from './searchIcon.svg'
 import userIcon from './userIcon.svg'
 import calenderIcon from './calenderIcon.svg'
@@ -23,10 +22,6 @@ import badgeIcon from './badgeIcon.svg'
 import menuIcon from './menuIcon.svg'
 import closeMenu from './closeMenu.svg'
 import guestsIcon from './guestsIcon.svg'
-import roomImg1 from './roomImg1.png'
-import roomImg2 from './roomImg2.png'
-import roomImg3 from './roomImg3.png'
-import roomImg4 from './roomImg4.png'
 import regImage from './n2.jpg'
 import exclusiveOfferCardImg1 from "./ex1.jpeg";
 import exclusiveOfferCardImg2 from "./ex2.jpeg";
@@ -40,7 +35,6 @@ import totalRevenueIcon from "./totalRevenueIcon.svg";
 
 
 export const assets = {
-    logo,
     searchIcon,
     userIcon,
     calenderIcon,
@@ -112,21 +106,6 @@ export const roomCommonData = [
     { icon: assets.heartIcon, title: "Smooth Check-In", description: "100% of guests gave check-in a 5-star rating." },
 ];
 
-// User Dummy Data
-export const userDummyData = {
-    "_id": "user_2unqyL4diJFP1E3pIBnasc7w8hP",
-    "username": "Great Stack",
-    "email": "user.greatstack@gmail.com",
-    "image": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJ2N2c5YVpSSEFVYVUxbmVYZ2JkSVVuWnFzWSJ9",
-    "role": "hotelOwner",
-    "createdAt": "2025-03-25T09:29:16.367Z",
-    "updatedAt": "2025-04-10T06:34:48.719Z",
-    "__v": 1,
-    "recentSearchedCities": [
-        "New York"
-    ]
-}
-
 // Hotel Dummy Data
 export const hotelDummyData = {
     "_id": "67f76393197ac559e4089b72",
@@ -176,188 +155,6 @@ export const additionalHotels = [
         "__v": 0
     }
 ]
-
-// Rooms Dummy Data - More variety with different hotels
-export const roomsDummyData = [
-    {
-        "_id": "67f7647c197ac559e4089b96",
-        "hotel": hotelDummyData,
-        "roomType": "deluxe",
-        "pricePerNight": 399,
-        "amenities": ["Room Service", "Mountain View", "Pool Access"],
-        "images": [roomImg1, roomImg2, roomImg3, roomImg4],
-        "isAvailable": true,
-        "createdAt": "2025-04-10T06:26:04.013Z",
-        "updatedAt": "2025-04-10T06:26:04.013Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f76452197ac559e4089b8e",
-        "hotel": additionalHotels[0],
-        "roomType": "double",
-        "pricePerNight": 299,
-        "amenities": ["Free WiFi", "Mountain View", "Pool Access"],
-        "images": [roomImg2, roomImg3, roomImg4, roomImg1],
-        "isAvailable": true,
-        "createdAt": "2025-04-10T06:25:22.593Z",
-        "updatedAt": "2025-04-10T06:25:22.593Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f76406197ac559e4089b82",
-        "hotel": additionalHotels[1],
-        "roomType": "family",
-        "pricePerNight": 549,
-        "amenities": ["Free WiFi", "Free Breakfast", "Room Service"],
-        "images": [roomImg3, roomImg4, roomImg1, roomImg2],
-        "isAvailable": true,
-        "createdAt": "2025-04-10T06:24:06.285Z",
-        "updatedAt": "2025-04-10T06:24:06.285Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f763d8197ac559e4089b7a",
-        "hotel": additionalHotels[2],
-        "roomType": "single",
-        "pricePerNight": 199,
-        "amenities": ["Free WiFi", "Room Service", "Pool Access"],
-        "images": [roomImg4, roomImg1, roomImg2, roomImg3],
-        "isAvailable": true,
-        "createdAt": "2025-04-10T06:23:20.252Z",
-        "updatedAt": "2025-04-10T06:23:20.252Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f763d8197ac559e4089b7b",
-        "hotel": hotelDummyData,
-        "roomType": "double",
-        "pricePerNight": 349,
-        "amenities": ["Free WiFi", "Free Breakfast", "Mountain View"],
-        "images": [roomImg1, roomImg3, roomImg2, roomImg4],
-        "isAvailable": true,
-        "createdAt": "2025-04-10T06:23:20.252Z",
-        "updatedAt": "2025-04-10T06:23:20.252Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f763d8197ac559e4089b7c",
-        "hotel": additionalHotels[0],
-        "roomType": "single",
-        "pricePerNight": 159,
-        "amenities": ["Free WiFi", "Pool Access"],
-        "images": [roomImg2, roomImg4, roomImg1, roomImg3],
-        "isAvailable": false,
-        "createdAt": "2025-04-10T06:23:20.252Z",
-        "updatedAt": "2025-04-10T06:23:20.252Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f763d8197ac559e4089b7d",
-        "hotel": additionalHotels[1],
-        "roomType": "deluxe",
-        "pricePerNight": 699,
-        "amenities": ["Free WiFi", "Free Breakfast", "Room Service", "Mountain View", "Pool Access"],
-        "images": [roomImg3, roomImg1, roomImg4, roomImg2],
-        "isAvailable": true,
-        "createdAt": "2025-04-10T06:23:20.252Z",
-        "updatedAt": "2025-04-10T06:23:20.252Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f763d8197ac559e4089b7e",
-        "hotel": additionalHotels[2],
-        "roomType": "family",
-        "pricePerNight": 449,
-        "amenities": ["Free WiFi", "Free Breakfast", "Room Service"],
-        "images": [roomImg4, roomImg2, roomImg3, roomImg1],
-        "isAvailable": true,
-        "createdAt": "2025-04-10T06:23:20.252Z",
-        "updatedAt": "2025-04-10T06:23:20.252Z",
-        "__v": 0
-    }
-]
-
-
-
-// User Bookings Dummy Data - Updated to use first few rooms
-export const userBookingsDummyData = [
-    {
-        "_id": "67f76839994a731e97d3b8ce",
-        "user": userDummyData,
-        "room": {
-            "_id": "67f76452197ac559e4089b8e",
-            "roomType": "double",
-            "pricePerNight": 299,
-            "amenities": ["Free WiFi", "Mountain View", "Pool Access"],
-            "images": [roomImg2, roomImg3, roomImg4, roomImg1],
-            "isAvailable": true
-        },
-        "hotel": additionalHotels[0],
-        "checkInDate": "2025-04-30T00:00:00.000Z",
-        "checkOutDate": "2025-05-01T00:00:00.000Z",
-        "totalPrice": 299,
-        "guests": 1,
-        "status": "pending",
-        "paymentMethod": "Stripe",
-        "isPaid": true,
-        "createdAt": "2025-04-10T06:42:01.529Z",
-        "updatedAt": "2025-04-10T06:43:54.520Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f76829994a731e97d3b8c3",
-        "user": userDummyData,
-        "room": {
-            "_id": "67f7647c197ac559e4089b96",
-            "roomType": "deluxe",
-            "pricePerNight": 399,
-            "amenities": ["Room Service", "Mountain View", "Pool Access"],
-            "images": [roomImg1, roomImg2, roomImg3, roomImg4],
-            "isAvailable": true
-        },
-        "hotel": hotelDummyData,
-        "checkInDate": "2025-04-27T00:00:00.000Z",
-        "checkOutDate": "2025-04-28T00:00:00.000Z",
-        "totalPrice": 399,
-        "guests": 1,
-        "status": "pending",
-        "paymentMethod": "Pay At Hotel",
-        "isPaid": false,
-        "createdAt": "2025-04-10T06:41:45.873Z",
-        "updatedAt": "2025-04-10T06:41:45.873Z",
-        "__v": 0
-    },
-    {
-        "_id": "67f76810994a731e97d3b8b4",
-        "user": userDummyData,
-        "room": {
-            "_id": "67f763d8197ac559e4089b7a",
-            "roomType": "single",
-            "pricePerNight": 199,
-            "amenities": ["Free WiFi", "Room Service", "Pool Access"],
-            "images": [roomImg4, roomImg1, roomImg2, roomImg3],
-            "isAvailable": true
-        },
-        "hotel": additionalHotels[2],
-        "checkInDate": "2025-04-11T00:00:00.000Z",
-        "checkOutDate": "2025-04-12T00:00:00.000Z",
-        "totalPrice": 199,
-        "guests": 1,
-        "status": "pending",
-        "paymentMethod": "Pay At Hotel",
-        "isPaid": false,
-        "createdAt": "2025-04-10T06:41:20.501Z",
-        "updatedAt": "2025-04-10T06:41:20.501Z",
-        "__v": 0
-    }
-]
-
-// Dashboard Dummy Data
-export const dashboardDummyData = {
-    "totalBookings": 3,
-    "totalRevenue": 897,
-    "bookings": userBookingsDummyData
-}
 
 // --------- SVG code for Book Icon------
 /* 

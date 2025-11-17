@@ -95,7 +95,7 @@ const AddRooms = () => {
     }
   };
   return (
-    <form onSubmit={onSubmitHandler} action="">
+    <form onSubmit={onSubmitHandler} className="mb-32" action="">
       <Title
         align="left"
         font="outfit"
@@ -109,7 +109,7 @@ const AddRooms = () => {
         {Object.keys(images).map((key) => (
           <label htmlFor={`roomImage${key}`} key={key}>
             <img
-              className="max-h-13cursor-pointer capacity-80"
+              className="w-32 h-32 object-cover cursor-pointer border-2 border-gray-300 rounded-lg hover:border-amber-400 transition-colors"
               src={
                 images[key]
                   ? URL.createObjectURL(images[key])
