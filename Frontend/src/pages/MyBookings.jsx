@@ -32,7 +32,6 @@ const MyBookings = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  // Refresh bookings when component becomes visible (e.g., returning from payment)
   useEffect(() => {
     const handleFocus = () => {
       if (user) {
