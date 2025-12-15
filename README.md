@@ -1,6 +1,6 @@
 <div align="center">
    
- <img width="120" height="120" src='https://res.cloudinary.com/dp27ua535/image/upload/v1765794849/yatri_qdi61u.png'>
+ <img width="180" height="180" src='https://res.cloudinary.com/dp27ua535/image/upload/v1765794849/yatri_qdi61u.png'>
 
 </div>
 
