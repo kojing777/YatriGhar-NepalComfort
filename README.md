@@ -1,9 +1,16 @@
-# YatriGhar-Nepal Comfort
+<div align="center">
+   
+# <img width="120" height="120" src='https://res.cloudinary.com/dp27ua535/image/upload/v1765794849/yatri_qdi61u.png'> — Nepal Comfort
 
-Full-Stack Hotel Booking Platform (MERN + Clerk + Stripe).
-## Features
+# </div> <p align="center"> <img alt="React" src="https://img.shields.io/badge/React-Vite-blue.svg"> <img alt="Node.js" src="https://img.shields.io/badge/Node.js-Express-green.svg"> <img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-Database-green.svg"> <img alt="Stripe" src="https://img.shields.io/badge/Stripe-Payments-purple.svg"> <img alt="License" src="https://img.shields.io/badge/License-ISC-yellow.svg"> </p>
 
-### User Features
+#### YatriGhar is a full-stack hotel booking platform designed for seamless accommodation discovery and booking across Nepal. Built with the MERN stack, it supports secure authentication, real-time bookings, online payments, hotel owner dashboards, and a modern, responsive UI.
+
+## 📸 Preview
+<p align="center" width="80%"> <img src="https://res.cloudinary.com/dp27ua535/image/upload/v1765795694/Screenshot_2025-12-15_163150_oyolyi.png" /> <br><br> </p>
+
+## 🌟 Key Features
+### 👤 User Features
 - User authentication and authorization using Clerk
 - Search and browse hotel rooms by city
 - View detailed room information and images
@@ -11,13 +18,13 @@ Full-Stack Hotel Booking Platform (MERN + Clerk + Stripe).
 - Manage personal bookings and reviews
 - Responsive design for mobile and desktop
 
-### Hotel Owner Features
+### 🏨 Hotel Owner Features
 - Register and manage hotel properties
 - Add, edit, and list rooms with images
 - Dashboard for managing bookings and analytics
 - Secure owner-specific routes and interfaces
 
-### General Features
+### 🔔 General Features
 - Image upload and management via Cloudinary
 - Email notifications using Nodemailer and Brevo
 - Real-time booking confirmations
@@ -25,30 +32,30 @@ Full-Stack Hotel Booking Platform (MERN + Clerk + Stripe).
 - Newsletter subscription
 - Gallery and blog sections
 
-## Tech Stack
+## 🚀Tech Stack
 
 ### Backend
-- **Node.js** with **Express.js** for server-side logic
-- **MongoDB** with **Mongoose** for database management
-- **Clerk** for authentication and user management
-- **Stripe** for payment processing
-- **Cloudinary** for image storage and optimization
-- **Nodemailer** and **Brevo** for email services
-- **Multer** for file uploads
-- **CORS** for cross-origin requests
+- **🟩Node.js** with **Express.js** for server-side logic
+- **🍃MongoDB** with **Mongoose** for database management
+- **🔐Clerk** for authentication and user management
+- **💳Stripe** for payment processing
+- **☁️Cloudinary** for image storage and optimization
+- **📧Nodemailer** and **Brevo** for email services
+- **📦Multer** for file uploads
+- **🌍CORS** for cross-origin requests
 
 ### Frontend
-- **React** with **Vite** for fast development and building
-- **Tailwind CSS** for styling and responsive design
-- **Framer Motion** for animations
-- **React Router** for client-side routing
-- **Axios** for API requests
-- **React Hot Toast** for notifications
-- **React Icons** for icon components
+- **⚛️React** with **Vite** for fast development and building
+- **🎨Tailwind CSS** for styling and responsive design
+- **🎞Framer Motion** for animations
+- **🛤React Router** for client-side routing
+- **🔗Axios** for API requests
+- **🔔React Hot Toast** for notifications
+- **🎯React Icons** for icon components
 
-## Installation
+## 📦 Installation
 
-### Prerequisites
+### ✅  Prerequisites
 - Node.js (v16 or higher)
 - MongoDB (local or cloud instance)
 - Clerk account for authentication
@@ -56,7 +63,7 @@ Full-Stack Hotel Booking Platform (MERN + Clerk + Stripe).
 - Cloudinary account for image storage
 - Email service accounts (Brevo/Nodemailer)
 
-### Backend Setup
+### 🛠️ Backend Setup
 1. Navigate to the `Backend` directory:
    ```bash
    cd Backend
@@ -111,7 +118,7 @@ Full-Stack Hotel Booking Platform (MERN + Clerk + Stripe).
    npm run dev
    ```
 
-## Usage
+## 🔒 Usage
 
 1. Ensure both backend and frontend servers are running.
 2. Open your browser and navigate to `http://localhost:5173`.
@@ -119,7 +126,7 @@ Full-Stack Hotel Booking Platform (MERN + Clerk + Stripe).
 4. As a user, search for rooms, view details, and make bookings.
 5. As a hotel owner, access the owner dashboard to manage your properties.
 
-## Project Structure
+## 📁Project Structure
 
 ```
 yatrighar/
@@ -206,7 +213,7 @@ yatrighar/
                 └── ListRooms.jsx
 ```
 
-## API Endpoints
+## 🔌API Endpoints
 
 ### User Routes
 - `GET /api/user` - Get user profile
@@ -228,7 +235,7 @@ yatrighar/
 - `GET /api/hotels` - Get all hotels
 - `POST /api/hotels` - Register new hotel (owner only)
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
@@ -236,7 +243,7 @@ yatrighar/
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+## 📜License
 
 This project is licensed under the ISC License.
 
